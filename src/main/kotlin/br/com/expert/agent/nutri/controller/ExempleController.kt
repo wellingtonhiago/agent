@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/teste")
 class Controller(
     private val chatClient: ChatClient,
+    private val openAiChatModel: OpenAiChatModel
 ) {
 
     private val userImput = "Hello, World!"
