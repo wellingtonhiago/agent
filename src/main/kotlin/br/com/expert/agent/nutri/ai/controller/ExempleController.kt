@@ -1,4 +1,4 @@
-package br.com.expert.agent.nutri.controller
+package br.com.expert.agent.nutri.ai.controller
 
 import org.springframework.ai.chat.client.ChatClient
 import org.springframework.ai.openai.OpenAiChatModel

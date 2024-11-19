@@ -1,4 +1,4 @@
-package br.com.expert.agent.nutri.service
+package br.com.expert.agent.nutri.ai.service
 
 import org.springframework.ai.chat.client.ChatClient
 import org.springframework.ai.chat.client.ChatClient.Builder
