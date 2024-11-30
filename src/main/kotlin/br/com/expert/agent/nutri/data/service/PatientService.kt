@@ -56,7 +56,8 @@ class PatientService(
                 nome = patient.nome,
                 idade = patient.idade,
                 peso = patient.peso,
-                altura = patient.altura
+                altura = patient.altura,
+                objetivo = patient.objetivo
             )
         }.also { updatedPatient ->
             updatedPatient?.let { patientRepository.save(updatedPatient) }
@@ -67,7 +68,7 @@ class PatientService(
 
 
     @Transactional
-    fun patialUpdate(id: String, patient: Patient): Result<Patient?> = runCatching {
+    fun partialUpdate(id: String, patient: Patient): Result<Patient?> = runCatching {
         patientRepository.findById(id).getOrNull()
     }.onSuccess { patientFound ->
         patientFound.apply {
@@ -75,7 +76,8 @@ class PatientService(
                 nome = patient.nome ?: patientFound?.nome,
                 idade = patient.idade ?: patientFound?.idade,
                 peso = patient.peso ?: patientFound?.peso,
-                altura = patient.altura ?: patientFound?.altura
+                altura = patient.altura ?: patientFound?.altura,
+                objetivo = patient.objetivo ?: patientFound?.objetivo
             )
         }.also { updatedPatient ->
             updatedPatient?.let { patientRepository.save(updatedPatient) }

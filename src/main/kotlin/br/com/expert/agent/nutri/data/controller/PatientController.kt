@@ -31,7 +31,7 @@ class PatientController(
     fun findById(@PathVariable("id") id: String): ResponseEntity<Patient?> =
         ResponseEntity.ok(patientService.findById(id).getOrNull())
 
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
     fun findByNome(@PathVariable("nome") name: String): ResponseEntity<List<Patient>> =
         ResponseEntity.ok(patientService.findByNome(name).getOrNull())
 
@@ -41,10 +41,10 @@ class PatientController(
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: String, @RequestBody patient: Patient): ResponseEntity<Patient> =
-        ResponseEntity.ok(patientService.patialUpdate(id, patient).getOrNull())
+        ResponseEntity.ok(patientService.update(id, patient).getOrNull())
 
     @PatchMapping("/{id}")
     fun partialUpdate(@PathVariable("id") id: String, @RequestBody patient: Patient): ResponseEntity<Patient> =
-        ResponseEntity.ok(patientService.patialUpdate(id, patient).getOrNull())
+        ResponseEntity.ok(patientService.partialUpdate(id, patient).getOrNull())
 
 }

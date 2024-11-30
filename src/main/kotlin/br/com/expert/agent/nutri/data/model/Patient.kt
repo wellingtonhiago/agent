@@ -12,4 +12,5 @@ data class Patient(
     val idade: Int?,
     val peso: Double?,
     val altura: Double?,
+    val objetivo: String?
 )
