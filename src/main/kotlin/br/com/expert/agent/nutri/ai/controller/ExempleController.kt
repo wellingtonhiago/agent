@@ -1,7 +1,6 @@
 package br.com.expert.agent.nutri.ai.controller
 
 import org.springframework.ai.chat.client.ChatClient
-import org.springframework.ai.openai.OpenAiChatModel
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/teste")
 class Controller(
     private val chatClient: ChatClient,
-    private val openAiChatModel: OpenAiChatModel
 ) {
 
     private val userImput = "Hello, World!"
