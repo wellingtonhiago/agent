@@ -49,40 +49,36 @@ class PatientService(
 
     @Transactional
     fun update(id: String, patient: Patient): Result<Patient?> = runCatching {
-        patientRepository.findById(id).getOrNull()
-    }.onSuccess { patientFound ->
-        patientFound.apply {
-            Patient(
+        patientRepository.findById(id).getOrNull()?.let { patientFound ->
+            val updatedPatient = patientFound.copy(
                 nome = patient.nome,
                 idade = patient.idade,
                 peso = patient.peso,
                 altura = patient.altura,
                 objetivo = patient.objetivo
             )
-        }.also { updatedPatient ->
-            updatedPatient?.let { patientRepository.save(updatedPatient) }
+
+            patientRepository.save(updatedPatient)
         }
-    }.onFailure {exception ->
+    }.onFailure { exception ->
         logger.error("Unexpected error updating patient: ${exception.message}", exception)
     }
 
 
     @Transactional
     fun partialUpdate(id: String, patient: Patient): Result<Patient?> = runCatching {
-        patientRepository.findById(id).getOrNull()
-    }.onSuccess { patientFound ->
-        patientFound.apply {
-            Patient(
-                nome = patient.nome ?: patientFound?.nome,
-                idade = patient.idade ?: patientFound?.idade,
-                peso = patient.peso ?: patientFound?.peso,
-                altura = patient.altura ?: patientFound?.altura,
-                objetivo = patient.objetivo ?: patientFound?.objetivo
+        patientRepository.findById(id).getOrNull()?.let { patientFound ->
+            val updatedPatient = patientFound.copy(
+                nome = patient.nome ?: patientFound.nome,
+                idade = patient.idade ?: patientFound.idade,
+                peso = patient.peso ?: patientFound.peso,
+                altura = patient.altura ?: patientFound.altura,
+                objetivo = patient.objetivo ?: patientFound.objetivo
             )
-        }.also { updatedPatient ->
-            updatedPatient?.let { patientRepository.save(updatedPatient) }
+
+            patientRepository.save(updatedPatient)
         }
-    }.onFailure {exception ->
+    }.onFailure { exception ->
         logger.error("Unexpected error updating patient: ${exception.message}", exception)
     }
 }
